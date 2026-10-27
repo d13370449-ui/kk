@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的個人作品集</title>
+
+    <style>
+        /* ===== 01｜網站配色：想換色可以改這裡 ===== */
+        :root {
+            --green-dark: #18382D;
+            --green: #355747;
+            --green-light: #718575;
+            --sage: #C4D1BE;
+            --cream: #F1F0DF;
+            --white: #FFFDF6;
+            --ink: #24372D;
+            --line: #AAB9A7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.8;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        /* ===== 02｜頁首與導覽 ===== */
+        header {
+            background: var(--green-dark);
+            color: var(--cream);
+            padding: 20px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        nav button {
+            background: transparent;
+            color: var(--cream);
+            border: 1px solid var(--green-light);
+            padding: 7px 13px;
+            border-radius: 5px;
+            transition: .2s;
+        }
+
+        nav button:hover,
+        nav button.active {
+            background: var(--sage);
+            color: var(--green-dark);
+        }
+
+        /* ===== 03｜頁面切換 ===== */
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 22px 100px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn .3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.4;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            margin: 16px 0;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 19px;
+        }
+
+        .eyebrow {
+            color: var(--green-light);
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        .section-intro {
+            margin-bottom: 30px;
+            max-width: 650px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            border: 1px solid var(--green-dark);
+            background: var(--green-dark);
+            color: var(--cream);
+            padding: 10px 18px;
+            border-radius: 5px;
+            transition: .2s;
+        }
+
+        .button:hover {
+            background: var(--green);
+            transform: translateY(-2px);
+        }
+
+        .button-light {
+            background: transparent;
+            color: var(--green-dark);
+        }
+
+        .button-light:hover {
+            color: var(--cream);
+        }
+
+        /* ===== 04｜首頁 ===== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            align-items: center;
+            gap: 35px;
+            background: var(--green-dark);
+            color: var(--cream);
+            padding: clamp(25px, 5vw, 55px);
+            border-radius: 14px;
+        }
+
+        .hero p {
+            color: var(--sage);
+        }
+
+        .hero .eyebrow {
+            color: var(--sage);
+        }
+
+        .profile-frame {
+            background: var(--green);
+            border: 1px solid var(--green-light);
+            padding: 12px;
+            border-radius: 10px;
+            transform: rotate(2deg);
+        }
+
+        /* 【圖片替換處】
+   把 images/profile.jpg 換成你的圖片路徑。
+   沒有圖片時會顯示下方的預設圖案。 */
+        .profile-image {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: 5px;
+            background: var(--sage);
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 24px;
+        }
+
+        .quick-link {
+            border: 1px solid var(--line);
+            padding: 20px;
+            border-radius: 8px;
+            background: var(--white);
+            text-align: left;
+            color: var(--ink);
+            transition: .2s;
+        }
+
+        .quick-link:hover {
+            background: var(--sage);
+            transform: translateY(-3px);
+        }
+
+        /* ===== 05｜關於我 ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .about-photo {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            background: var(--sage);
+            border-radius: 8px;
+        }
+
+        /* ===== 06｜專長技能 ===== */
+        .skill {
+            margin: 22px 0;
+        }
+
+        .skill-label {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            border-radius: 20px;
+            background: #E1E5D9;
+            overflow: hidden;
+            margin-top: 7px;
+        }
+
+        .skill-fill {
+            height: 100%;
+            width: var(--level);
+            background: var(--green);
+            border-radius: 20px;
+        }
+
+        .tag-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--sage);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* ===== 07｜精選作品 ===== */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .work-card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--white);
+            transition: .2s;
+        }
+
+        .work-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .work-cover {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            background: var(--sage);
+        }
+
+        .work-info {
+            padding: 20px;
+        }
+
+        .work-info p {
+            font-size: 14px;
+        }
+
+        .work-info button {
+            border: 0;
+            border-bottom: 1px solid var(--green);
+            background: transparent;
+            color: var(--green-dark);
+            padding: 5px 0;
+        }
+
+        /* ===== 08｜作品詳細彈窗 ===== */
+        dialog {
+            width: min(90%, 560px);
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 25px;
+            color: var(--ink);
+            background: var(--white);
+        }
+
+        dialog::backdrop {
+            background: #10271F99;
+        }
+
+        .dialog-close {
+            float: right;
+            border: 0;
+            background: var(--sage);
+            border-radius: 5px;
+            padding: 5px 12px;
+        }
+
+        /* ===== 09｜學習歷程 ===== */
+        .timeline {
+            border-left: 2px solid var(--green-light);
+            margin-left: 8px;
+            padding-left: 25px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 0 0 30px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--green);
+            left: -32px;
+            top: 9px;
+        }
+
+        /* ===== 10｜聯絡我 ===== */
+        .contact-form {
+            display: grid;
+            gap: 14px;
+        }
+
+        .contact-form label {
+            display: grid;
+            gap: 5px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 5px;
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ===== 11｜GIF 小生物彩蛋 ===== */
+        .creature-widget {
+            position: fixed;
+            z-index: 10;
+            right: 20px;
+            bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .creature-button {
+            border: 0;
+            background: var(--green-dark);
+            border: 2px solid var(--sage);
+            border-radius: 50%;
+            width: 82px;
+            height: 82px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            box-shadow: 0 4px 16px #10271F33;
+            transition: .2s;
+        }
+
+        .creature-button:hover {
+            transform: rotate(-8deg) scale(1.06);
+        }
+
+        /* 【GIF 替換處】
+   將 images/creature.gif 換成自己的 GIF 路徑。
+   沒有 GIF 時，下方的問號會作為預設圖案。 */
+        .creature-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .creature-fallback {
+            color: var(--cream);
+            font-size: 35px;
+        }
+
+        .speech {
+            display: none;
+            width: min(270px, calc(100vw - 40px));
+            padding: 15px;
+            background: var(--white);
+            color: var(--green-dark);
+            border: 2px solid var(--green-dark);
+            border-radius: 12px 12px 2px 12px;
+            box-shadow: 4px 4px 0 var(--sage);
+            animation: fadeIn .2s ease;
+        }
+
+        .speech.show {
+            display: block;
+        }
+
+        .speech-name {
+            color: var(--green-light);
+            font-size: 11px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .speech-text {
+            margin: 0 0 10px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .speech-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .speech-actions button {
+            background: var(--sage);
+            color: var(--green-dark);
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 5px 9px;
+            font-size: 12px;
+        }
+
+        /* ===== 12｜頁尾 ===== */
+        footer {
+            background: var(--green-dark);
+            color: var(--sage);
+            text-align: center;
+            padding: 25px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            nav button {
+                font-size: 13px;
+                padding: 6px 9px;
+            }
+
+            main {
+                padding: 22px 15px 100px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-frame {
+                max-width: 280px;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid,
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .creature-widget {
+                right: 12px;
+                bottom: 12px;
+            }
+
+            .creature-button {
+                width: 68px;
+                height: 68px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== 頁首：修改網站名稱 ===== -->
+    <header>
+        <div class="logo">YOUR PORTFOLIO.</div>
+
+        <nav aria-label="網站導覽">
+            <button class="active" data-page="home" onclick="goTo('home')">首頁</button>
+            <button data-page="about" onclick="goTo('about')">關於我</button>
+            <button data-page="skills" onclick="goTo('skills')">專長技能</button>
+            <button data-page="works" onclick="goTo('works')">精選作品</button>
+            <button data-page="history" onclick="goTo('history')">學習歷程</button>
+            <button data-page="contact" onclick="goTo('contact')">與我聯絡</button>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ==============================
+     PAGE 01｜首頁
+     ============================== -->
+        <section class="page active" id="home">
+            <div class="hero">
+                <div>
+                    <div class="eyebrow">MULTIMEDIA & CREATIVE WORKS</div>
+
+                    <!-- 【修改處】填入你的名字 -->
+                    <h1>你好，<br>我是柯向恩。</h1>
+
+                    <!-- 【修改處】填入首頁簡介 -->
+                    <p>【簡單快速認識阿犬。】</p>
+
+                    <button class="button" onclick="goTo('works')">
+                        探索我的作品 ↗
+                    </button>
+                </div>
+
+                <div class="profile-frame">
+                    <!-- 【圖片替換處】換成自己的大頭照或代表圖 -->
+                    <img class="profile-image" src="images/profile.jpg" alt="我的個人代表圖片"
+                        onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
+                    <div hidden
+                        style="aspect-ratio:4/5;display:grid;place-items:center;background:#C4D1BE;color:#18382D;">
+                        【放置個人圖片】
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-links">
+                <button class="quick-link" onclick="goTo('about')">
+                    <div class="eyebrow">01 / ABOUT</div>
+                    <h3>關於我 ↗</h3>
+                    <div>認識創作者本人。</div>
+                </button>
+
+                <button class="quick-link" onclick="goTo('skills')">
+                    <div class="eyebrow">02 / SKILLS</div>
+                    <h3>專長技能 ↗</h3>
+                    <div>我會什麼、正在學什麼。</div>
+                </button>
+
+                <button class="quick-link" onclick="goTo('works')">
+                    <div class="eyebrow">03 / WORKS</div>
+                    <h3>精選作品 ↗</h3>
+                    <div>看看我做過的東西。</div>
+                </button>
+            </div>
+
+            <div class="card" style="margin-top:24px">
+                <div class="eyebrow">A LITTLE NOTE</div>
+                <h3>今日隨機備忘錄</h3>
+                <p id="daily-note">這裡有一張尚未拆封的紙條。</p>
+                <button class="button button-light" onclick="randomNote()">
+                    拆開紙條
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ==============================
+     PAGE 02｜關於我
+     ============================== -->
+        <section class="page" id="about">
+            <div class="section-intro">
+                <div class="eyebrow">ABOUT THE CREATOR</div>
+                <h2>關於我</h2>
+                <p>【在這裡填寫你的完整自我介紹。】</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="card">
+                    <h3>基本資料</h3>
+                    <p>姓名：【柯向恩】</p>
+                    <p>科系：【多媒體動畫系】</p>
+                    <p>興趣：【發呆、挖掘新事物】</p>
+                    <p>目前狀態：【畫圖畫累了就去畫圖放鬆/精神狀態非常美麗】</p>
+                </div>
+
+                <div class="card">
+                    <!-- 【圖片替換處】可放生活照、角色圖或創作過程 -->
+                    <img class="about-photo" src="images/about.jpg" alt="關於我的圖片"
+                        onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+                    <div hidden style="height:240px;background:#C4D1BE;display:grid;place-items:center;">
+                        【放置個人照片或插畫】
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>我喜歡的事物</h3>
+                    <p>【繪製日常小廢圖、觀察人類、做一些手作小勞作】</p>
+                </div>
+
+                <div class="card">
+                    <h3>我的創作理念</h3>
+                    <p>【填寫你對創作的想法，以及希望作品帶給別人的感受。】</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==============================
+     PAGE 03｜專長技能
+     ============================== -->
+        <section class="page" id="skills">
+            <div class="section-intro">
+                <div class="eyebrow">SKILLS & TOOLS</div>
+                <h2>專長技能</h2>
+                <p>【畫圖、製作小動畫、研究音樂製作、學習動畫製作。】</p>
+            </div>
+
+            <div class="card">
+                <!-- 【修改處】改技能名稱和百分比 -->
+                <div class="skill">
+                    <div class="skill-label">
+                        <span>【技能一】</span><span>【70%】</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--level:70%"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-label">
+                        <span>【技能二】</span><span>【50%】</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--level:50%"></div>
+                    </div>
+                </div>
+
+                <div class="skill">
+                    <div class="skill-label">
+                        <span>【技能三】</span><span>【35%】</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-fill" style="--level:35%"></div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:35px">使用工具</h3>
+                <div class="tag-list">
+                    <!-- 【修改處】新增或刪除工具標籤 -->
+                    <span class="tag">【Photoshop】</span>
+                    <span class="tag">【After Effects】</span>
+                    <span class="tag">【Blender】</span>
+                    <span class="tag">【其他工具】</span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==============================
+     PAGE 04｜精選作品
+     ============================== -->
+        <section class="page" id="works">
+            <div class="section-intro">
+                <div class="eyebrow">SELECTED WORKS</div>
+                <h2>精選作品</h2>
+                <p>【填寫作品集的簡短介紹。點擊作品可以查看詳細內容。】</p>
+            </div>
+
+            <div class="work-grid">
+
+                <!-- 作品 01：替換名稱、分類、圖片、介紹 -->
+                <article class="work-card">
+                    <img class="work-cover" src="images/work-01.jpg" alt="作品一封面"
+                        onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+                    <div hidden class="work-cover" style="display:grid;place-items:center;">
+                        【作品一圖片】
+                    </div>
+                    <div class="work-info">
+                        <div class="eyebrow">【作品分類】</div>
+                        <h3>【作品名稱一】</h3>
+                        <p>【用一兩句話介紹這件作品。】</p>
+                        <button onclick="openWork(0)">查看作品詳情 ↗</button>
+                    </div>
+                </article>
+
+                <!-- 作品 02 -->
+                <article class="work-card">
+                    <img class="work-cover" src="images/work-02.jpg" alt="作品二封面"
+                        onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+                    <div hidden class="work-cover" style="display:grid;place-items:center;">
+                        【作品二圖片】
+                    </div>
+                    <div class="work-info">
+                        <div class="eyebrow">【作品分類】</div>
+                        <h3>【作品名稱二】</h3>
+                        <p>【用一兩句話介紹這件作品。】</p>
+                        <button onclick="openWork(1)">查看作品詳情 ↗</button>
+                    </div>
+                </article>
+
+                <!-- 作品 03 -->
+                <article class="work-card">
+                    <img class="work-cover" src="images/work-03.jpg" alt="作品三封面"
+                        onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+                    <div hidden class="work-cover" style="display:grid;place-items:center;">
+                        【作品三圖片】
+                    </div>
+                    <div class="work-info">
+                        <div class="eyebrow">【作品分類】</div>
+                        <h3>【作品名稱三】</h3>
+                        <p>【用一兩句話介紹這件作品。】</p>
+                        <button onclick="openWork(2)">查看作品詳情 ↗</button>
+                    </div>
+                </article>
+
+                <!-- 作品 04 -->
+                <article class="work-card">
+                    <img class="work-cover" src="images/work-04.jpg" alt="作品四封面"
+                        onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+                    <div hidden class="work-cover" style="display:grid;place-items:center;">
+                        【作品四圖片】
+                    </div>
+                    <div class="work-info">
+                        <div class="eyebrow">【作品分類】</div>
+                        <h3>【作品名稱四】</h3>
+                        <p>【用一兩句話介紹這件作品。】</p>
+                        <button onclick="openWork(3)">查看作品詳情 ↗</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- 作品詳細介紹視窗 -->
+        <dialog id="work-dialog">
+            <button class="dialog-close" onclick="closeWork()">關閉 ✕</button>
+            <div class="eyebrow">WORK DETAILS</div>
+            <h2 id="work-title">作品名稱</h2>
+            <p id="work-category"></p>
+            <p id="work-description"></p>
+        </dialog>
+
+
+        <!-- ==============================
+     PAGE 05｜學習歷程
+     ============================== -->
+        <section class="page" id="history">
+            <div class="section-intro">
+                <div class="eyebrow">MY JOURNEY</div>
+                <h2>學習歷程</h2>
+                <p>【記錄你的學習過程、課程作品、活動或重要經驗。】</p>
+            </div>
+
+            <div class="card">
+                <div class="timeline">
+
+                    <!-- 【修改處】每一段都可以更換 -->
+                    <div class="timeline-item">
+                        <div class="eyebrow">【年份／日期】</div>
+                        <h3>【學習事件一】</h3>
+                        <p>【描述這次經驗、學到的能力或遇到的挑戰。】</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="eyebrow">【年份／日期】</div>
+                        <h3>【學習事件二】</h3>
+                        <p>【描述這次經驗，以及你有哪些成長。】</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="eyebrow">【年份／日期】</div>
+                        <h3>【學習事件三】</h3>
+                        <p>【填寫課程、競賽、活動或個人創作經歷。】</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==============================
+     PAGE 06｜與我聯絡
+     ============================== -->
+        <section class="page" id="contact">
+            <div class="section-intro">
+                <div class="eyebrow">GET IN TOUCH</div>
+                <h2>與我聯絡</h2>
+                <p>【填寫聯絡說明。個人聯絡資料可以暫時不公開。】</p>
+            </div>
+
+            <div class="card">
+                <h3>聯絡資訊</h3>
+                <!-- 【修改處】可填公開使用的電子郵件或社群連結 -->
+                <p>電子郵件：【你的公開聯絡信箱】</p>
+                <p>作品平台：【你的作品集或社群連結】</p>
+
+                <hr style="border:0;border-top:1px solid #AAB9A7;margin:25px 0">
+
+                <h3>留言給我</h3>
+                <p class="small-note">
+                    此表單會開啟訪客裝置上的電子郵件程式，不會將資料直接儲存到網站。
+                </p>
+
+                <form class="contact-form" onsubmit="sendMessage(event)">
+                    <label>
+                        你的稱呼
+                        <input id="sender-name" type="text" placeholder="怎麼稱呼你？" required>
+                    </label>
+
+                    <label>
+                        留言內容
+                        <textarea id="sender-message" placeholder="想說些什麼？" required></textarea>
+                    </label>
+
+                    <button class="button" type="submit">透過電子郵件傳送 ↗</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <!-- 【修改處】填入你的名字或網站名稱 -->
+        <p>© 2026 【你的名字】 · MADE WITH CURIOSITY</p>
+        <p>這個網站裡的所有東西，看起來都很正常。</p>
+    </footer>
+
+
+    <!-- ==============================
+     GIF 小生物互動區
+     ============================== -->
+    <div class="creature-widget">
+
+        <!-- 點擊生物，顯示或關閉對話框 -->
+        <div class="speech" id="speech-box" aria-live="polite">
+            <div class="speech-name">UNKNOWN CREATURE / 001</div>
+
+            <p class="speech-text" id="speech-text">
+                請問你的網站有賣馬鈴薯嗎？
+            </p>
+
+            <div class="speech-actions">
+                <button onclick="talkAgain()">再說一句</button>
+                <button onclick="closeSpeech()">我先走了</button>
+            </div>
+        </div>
+
+        <button class="creature-button" onclick="toggleCreature()" aria-label="點擊神祕生物，查看對話" title="點我，拜託。">
+            <!-- 【GIF 替換處】放入自己的動圖 -->
+            <img src="images/creature.gif" alt="神祕生物"
+                onerror="this.style.display='none';this.nextElementSibling.hidden=false;">
+            <span class="creature-fallback" hidden>?</span>
+        </button>
+    </div>
+
+
+    <script>
+        /* ===== 01｜分頁切換 ===== */
+        function goTo(pageId) {
+            document.querySelectorAll(".page").forEach(page => {
+                page.classList.remove("active");
+            });
+
+            document.getElementById(pageId).classList.add("active");
+
+            document.querySelectorAll("nav button").forEach(button => {
+                button.classList.toggle(
+                    "active",
+                    button.dataset.page === pageId
+                );
+            });
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+
+        /* ===== 02｜首頁隨機紙條 ===== */
+        /* 【修改處】在這裡增加自己想要的隨機句子 */
+        const notes = [
+            "今天的雲看起來像一張沒有填完的表單。",
+            "如果把鬧鐘放進冰箱，它會變冷靜嗎？",
+            "我剛剛想了一個很重要的問題，忘記了。",
+            "這張紙條原本有內容，但它請假了。",
+            "請不要在星期四打開抽屜。",
+            "你的滑鼠剛剛偷偷打了一個哈欠。",
+            "恭喜，你已經閱讀了這句話。",
+            "水知道自己是濕的嗎？",
+            "這不是一個提示。這是一顆馬鈴薯。",
+            "如果你看到這句話，請替空氣鼓掌。"
+        ];
+
+        function randomNote() {
+            const note = notes[Math.floor(Math.random() * notes.length)];
+            document.getElementById("daily-note").textContent = note;
+        }
+
+
+        /* ===== 03｜作品詳細介紹 ===== */
+        /* 【修改處】每件作品的名稱、分類與說明 */
+        const works = [
+            {
+                title: "【作品名稱一】",
+                category: "【作品分類一】",
+                description: "【作品一的完整介紹、創作理念與製作過程。】"
+            },
+            {
+                title: "【作品名稱二】",
+                category: "【作品分類二】",
+                description: "【作品二的完整介紹、創作理念與製作過程。】"
+            },
+            {
+                title: "【作品名稱三】",
+                category: "【作品分類三】",
+                description: "【作品三的完整介紹、創作理念與製作過程。】"
+            },
+            {
+                title: "【作品名稱四】",
+                category: "【作品分類四】",
+                description: "【作品四的完整介紹、創作理念與製作過程。】"
+            }
+        ];
+
+        function openWork(index) {
+            const work = works[index];
+
+            document.getElementById("work-title").textContent = work.title;
+            document.getElementById("work-category").textContent = work.category;
+            document.getElementById("work-description").textContent = work.description;
+
+            document.getElementById("work-dialog").showModal();
+        }
+
+        function closeWork() {
+            document.getElementById("work-dialog").close();
+        }
+
+
+        /* ===== 04｜小生物的無厘頭對話 ===== */
+        /* 【修改處】直接在這裡增加、修改對話 */
+        const creatureLines = [
+            "請問你的網站有賣馬鈴薯嗎？",
+            "我剛剛把星期三吃掉了。",
+            "你知道嗎？椅子其實一直在等你。",
+            "我不是在發呆，我在更新雲端。",
+            "你有看到我的另一隻左腳嗎？",
+            "不好意思，這裡可以寄放一朵雲嗎？",
+            "我剛剛跟影子吵架，它不肯道歉。",
+            "你看起來像一個尚未儲存的檔案。",
+            "請問你的冰箱有沒有夢想？",
+            "我決定從今天開始當一顆圓形的星期天。",
+            "我沒有迷路，是世界擅自移動了。",
+            "你好，我是你三分鐘前忘記的事情。",
+            "不要相信那根香蕉，它知道太多了。",
+            "我剛剛數到第八個字，然後下班了。",
+            "你可以幫我把沉默寄給明天嗎？",
+            "我今天不想當生物，我想當一個括號。",
+            "這個網站的地板有點像禮拜二。",
+            "請稍等，我正在和一粒灰塵開會。",
+            "我剛剛看了看時間，時間也看了看我。",
+            "其實我是你的滑鼠墊派來的。"
+        ];
+
+        let previousLine = -1;
+
+        function toggleCreature() {
+            const box = document.getElementById("speech-box");
+
+            if (box.classList.contains("show")) {
+                closeSpeech();
+            } else {
+                talkAgain();
+                box.classList.add("show");
+            }
+        }
+
+        function talkAgain() {
+            let index;
+
+            // 盡量避免連續兩次出現相同的句子
+            do {
+                index = Math.floor(Math.random() * creatureLines.length);
+            } while (creatureLines.length > 1 && index === previousLine);
+
+            previousLine = index;
+
+            document.getElementById("speech-text").textContent =
+                creatureLines[index];
+
+            document.getElementById("speech-box").classList.add("show");
+        }
+
+        function closeSpeech() {
+            document.getElementById("speech-box").classList.remove("show");
+        }
+
+
+        /* ===== 05｜聯絡表單 ===== */
+        /* 【修改處】將下面的信箱改成你願意公開的電子郵件。
+           不想公開聯絡資訊，也可以暫時不使用此功能。 */
+        const contactEmail = "【在這裡填入你的電子郵件】";
+
+        function sendMessage(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("sender-name").value.trim();
+            const message = document.getElementById("sender-message").value.trim();
+
+            if (!name || !message) return;
+
+            // 尚未設定信箱時，不開啟郵件程式
+            if (!contactEmail.includes("@") || contactEmail.includes("【")) {
+                alert("此功能尚未設定電子郵件，請先填入自己的信箱。");
+                return;
+            }
+
+            const subject = encodeURIComponent("作品集網站留言");
+            const body = encodeURIComponent(
+                "稱呼：" + name + "\n\n留言內容：\n" + message
+            );
+
+            window.location.href =
+                "mailto:" + contactEmail +
+                "?subject=" + subject +
+                "&body=" + body;
+        }
+
+
+        /* ===== 06｜額外小彩蛋 ===== */
+        /* 點擊頁尾的網站名稱三次，可以觸發隱藏訊息 */
+        let footerClicks = 0;
+
+        document.querySelector("footer").addEventListener("click", function () {
+            footerClicks++;
+
+            if (footerClicks >= 3) {
+                footerClicks = 0;
+                alert("你為什麼要一直點頁尾？\n……算了，祝你今天撿到一顆石頭。");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
